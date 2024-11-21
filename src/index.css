@@ -23,6 +23,10 @@ iframe {
   border: none; /* Optional: Removes the border of the iframe */
 }
 
+.controls {
+  height: auto;
+}
+
 #videoContainer {
   position: absolute;
   left: 10px;
@@ -36,6 +40,7 @@ iframe {
 }
 
 video {
+  border-radius: 5px;
   /* background-color: green; */
   width: 100%;
   /* flex: 1; */
