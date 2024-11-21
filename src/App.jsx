@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 
 /*
-[] record screen
-[X] access camera
-[X] record video
+[x] record screen
+[x] access camera
+[x] record video
 [] take photos
 [] record GPS position
 
@@ -24,12 +24,9 @@ function App() {
       console.log("recording screen");
       if (event.data.size > 0) {
         recordedChunks.push(event.data);
-
         console.log("test: ", event.data);
-
         const formData = new FormData();
         // const videoBlob = new Blob([event.data], { type: "video/mkv" });
-
         formData.append("video", event.data, "test.webm"); // Add Blob with filename
 
         fetch("https://5e16-14-202-115-138.ngrok-free.app/upload", {
@@ -38,13 +35,19 @@ function App() {
         })
           .then((response) => response.json()) // Handle the response
           .then((data) => {
-            console.log("Success:", data); // Handle success
+            console.log("success: ", data);
+            // alert("Success, it worked.");
           })
           .catch((error) => {
-            console.error("Error:", error); // Handle error
+            console.error("Error:", error);
+            // alert("Error when uploading file");
           });
       }
     };
+
+    // mediaRecorder.onstop = () => {
+    //   console.log(recordedChunks);
+    // };
   }, [mediaRecorder]);
 
   async function recordScreen() {
