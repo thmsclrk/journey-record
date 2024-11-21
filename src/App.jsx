@@ -13,9 +13,39 @@ function App() {
   // const videoRef = useRef(null);
   const [error, setError] = useState("");
   const [aspectRatio, setAspectRatio] = useState(null);
+  const [mediaRecorder, setMediaRecord] = useState(null);
 
-  let mediaRecorder;
   let recordedChunks = [];
+
+  useEffect(() => {
+    if (!mediaRecorder) return;
+
+    mediaRecorder.ondataavailable = (event) => {
+      console.log("recording screen");
+      if (event.data.size > 0) {
+        recordedChunks.push(event.data);
+
+        console.log("test: ", event.data);
+
+        const formData = new FormData();
+        // const videoBlob = new Blob([event.data], { type: "video/mkv" });
+
+        formData.append("video", event.data, "test.webm"); // Add Blob with filename
+
+        fetch("https://5e16-14-202-115-138.ngrok-free.app/upload", {
+          method: "POST",
+          body: formData, // Send FormData with the Blob
+        })
+          .then((response) => response.json()) // Handle the response
+          .then((data) => {
+            console.log("Success:", data); // Handle success
+          })
+          .catch((error) => {
+            console.error("Error:", error); // Handle error
+          });
+      }
+    };
+  }, [mediaRecorder]);
 
   async function recordScreen() {
     const displayStream = await navigator.mediaDevices.getDisplayMedia({
@@ -23,35 +53,9 @@ function App() {
       audio: false, // Set to true if you want to capture audio as well
     });
 
-    mediaRecorder = new MediaRecorder(displayStream);
+    const mediaRecorder = new MediaRecorder(displayStream, { mimeType: "video/webm;codecs=vp8" });
 
-    mediaRecorder.ondataavailable = (event) => {
-      if (event.data.size > 0) {
-        recordedChunks.push(event.data);
-      }
-    };
-
-    mediaRecorder.onstop = () => {
-      const videoBlob = new Blob(recordedChunks, { type: "video/webm" });
-
-      const formData = new FormData();
-      const currentTime = new Date();
-      const formattedTime = currentTime.toISOString().replace(/[:.-]/g, "_"); // Format the time to a valid filename
-      const fileName = `journeyRecording_${formattedTime}.webm`; // Create a filename using the formatted time
-
-      formData.append("video", videoBlob, fileName); // Add Blob with filename
-      fetch("https://5e16-14-202-115-138.ngrok-free.app/upload", {
-        method: "POST",
-        body: formData, // Send FormData with the Blob
-      })
-        .then((response) => response.json()) // Handle the response
-        .then((data) => {
-          console.log("Success:", data); // Handle success
-        })
-        .catch((error) => {
-          console.error("Error:", error); // Handle error
-        });
-    };
+    setMediaRecord(mediaRecorder);
 
     mediaRecorder.start();
     document.getElementById("startRecording").disabled = true;
