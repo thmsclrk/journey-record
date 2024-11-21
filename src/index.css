@@ -1,3 +1,8 @@
+:root {
+  --pam-border: 3px solid #3f6;
+  --pam-green: #3f6;
+}
+
 body,
 html {
   margin: 0;
@@ -24,26 +29,48 @@ iframe {
 }
 
 .controls {
-  height: auto;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  /* border: var(--pam-border); */
+  /* width: 40px; */
+  aspect-ratio: 1;
+  border-radius: 50%;
+  /* background-color: var(--pam-green); */
+  /* background-color: white; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #videoContainer {
   position: absolute;
   left: 10px;
   top: 40px;
-  /* background-color: green; */
-  width: 40%;
-  margin: 0;
-  border: none;
-  padding: 0;
+  border: var(--pam-border);
+  width: 30%; /* Change this to the desired diameter */
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  /* resize: both; */
+  /* cursor: grab; */
+  /* position: relative; */
 }
 
 video {
-  border-radius: 5px;
-  /* background-color: green; */
+  /* border-radius: 50%; */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 100%;
-  /* flex: 1; */
+  min-height: 100%;
+  /* min-width: 50%;
+  min-height: 50%; */
+  object-fit: cover;
 }
 
 #explorer {

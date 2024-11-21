@@ -63,12 +63,12 @@ const App = () => {
         </button>
       )}
 
-      {recordedVideoUrl && (
+      {/* {recordedVideoUrl && (
         <div style={{ marginTop: "20px" }}>
           <h2>Recorded Video:</h2>
           <video controls src={recordedVideoUrl} style={{ width: "100%", maxWidth: "600px" }}></video>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

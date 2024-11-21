@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import Controls from "./components/Controls";
+
 /*
 [x] record screen
 [x] access camera
@@ -82,14 +84,7 @@ function App() {
 
   return (
     <>
-      <div className="controls">
-        <button id="startRecording" onClick={() => recordScreen()}>
-          Record
-        </button>
-        <button id="stopRecording" onClick={() => stopRecording()}>
-          Stop
-        </button>
-      </div>
+      <Controls />
       <div id="explorer">
         <iframe src="https://connect.ap.app.pam.co/?navmapId=9be4fec5-1945-11ee-9083-0a17c8c3f95c" allow="geolocation; accelerometer;  gyroscope; magnetometer"></iframe>
       </div>
