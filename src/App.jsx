@@ -41,7 +41,7 @@ function App() {
         .then((response) => response.json()) // Handle the response
         .then((data) => {
           console.log("success: ", data);
-          alert("Success, it worked.");
+          // alert("Success, it worked.");
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -51,25 +51,33 @@ function App() {
   }, [mediaRecorder]);
 
   async function recordScreen() {
-    const displayStream = await navigator.mediaDevices.getDisplayMedia({
-      video: true,
-      audio: false, // Set to true if you want to capture audio as well
-    });
+    try {
+      const displayStream = await navigator.mediaDevices.getDisplayMedia({
+        video: true,
+        audio: false, // Set to true if you want to capture audio as well
+      });
 
-    const mediaRecorder = new MediaRecorder(displayStream, { mimeType: "video/webm;codecs=vp8" });
+      const mediaRecorder = new MediaRecorder(displayStream, { mimeType: "video/webm;codecs=vp8" });
 
-    setMediaRecord(mediaRecorder);
+      setMediaRecord(mediaRecorder);
 
-    mediaRecorder.start(10);
+      mediaRecorder.start(10);
 
-    document.getElementById("startRecording").disabled = true;
-    document.getElementById("stopRecording").disabled = false;
+      document.getElementById("startRecording").disabled = true;
+      document.getElementById("stopRecording").disabled = false;
+    } catch (error) {
+      console.error("error when trying to recording screen: ", error);
+    }
   }
 
   function stopRecording() {
-    mediaRecorder.stop();
-    document.getElementById("startRecording").disabled = false;
-    document.getElementById("stopRecording").disabled = true;
+    try {
+      mediaRecorder.stop();
+      document.getElementById("startRecording").disabled = false;
+      document.getElementById("stopRecording").disabled = true;
+    } catch (error) {
+      console.error("error when stopping recording screen: ", error);
+    }
   }
 
   return (
