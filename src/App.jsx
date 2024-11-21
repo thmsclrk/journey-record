@@ -18,9 +18,7 @@ function App() {
     const getCameraStream = async () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        if (window.URL && window.URL.createObjectURL) {
-          videoRef.current.src = window.URL.createObjectURL(stream);
-        } else {
+        if (videoRef.current) {
           videoRef.current.srcObject = stream;
         }
       } catch (err) {
@@ -30,21 +28,6 @@ function App() {
     };
 
     getCameraStream();
-
-    // Calculate aspect ratio when the video metadata is loaded
-    const onMetadataLoaded = () => {
-      const video = videoRef.current;
-      if (video) {
-        const width = video.videoWidth;
-        const height = video.videoHeight;
-        const ratio = width / height;
-        setAspectRatio(ratio);
-      }
-    };
-
-    if (videoRef.current) {
-      videoRef.current.addEventListener("loadedmetadata", onMetadataLoaded);
-    }
 
     // Cleanup: stop the video stream when the component unmounts
     return () => {
@@ -71,7 +54,7 @@ function App() {
         <button id="stopRecording">Stop</button>
       </div>
       <div>
-        <video ref={videoRef} autoPlay></video>
+        <video ref={videoRef} autoPlay muted></video>
         {/* <iframe src="https://connect.ap.app.pam.co/?navmapId=9be4fec5-1945-11ee-9083-0a17c8c3f95c" allow="geolocation; accelerometer;  gyroscope; magnetometer"></iframe> */}
       </div>
     </>
