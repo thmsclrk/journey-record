@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 /*
 [x] record screen
@@ -21,33 +21,33 @@ function App() {
     if (!mediaRecorder) return;
 
     mediaRecorder.ondataavailable = (event) => {
-      console.log("recording screen");
       if (event.data.size > 0) {
+        console.log("recording screen");
         recordedChunks.push(event.data);
-        console.log("test: ", event.data);
-        const formData = new FormData();
-        // const videoBlob = new Blob([event.data], { type: "video/mkv" });
-        formData.append("video", event.data, "test.webm"); // Add Blob with filename
-
-        fetch("https://5e16-14-202-115-138.ngrok-free.app/upload", {
-          method: "POST",
-          body: formData, // Send FormData with the Blob
-        })
-          .then((response) => response.json()) // Handle the response
-          .then((data) => {
-            console.log("success: ", data);
-            // alert("Success, it worked.");
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-            // alert("Error when uploading file");
-          });
       }
     };
 
-    // mediaRecorder.onstop = () => {
-    //   console.log(recordedChunks);
-    // };
+    mediaRecorder.onstop = () => {
+      const blob = new Blob(recordedChunks, { type: "video/webm" });
+
+      const formData = new FormData();
+
+      formData.append("video", blob, "test.webm");
+
+      fetch("https://5e16-14-202-115-138.ngrok-free.app/upload", {
+        method: "POST",
+        body: formData, // Send FormData with the Blob
+      })
+        .then((response) => response.json()) // Handle the response
+        .then((data) => {
+          console.log("success: ", data);
+          alert("Success, it worked.");
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          alert("Error when uploading file");
+        });
+    };
   }, [mediaRecorder]);
 
   async function recordScreen() {
@@ -60,7 +60,8 @@ function App() {
 
     setMediaRecord(mediaRecorder);
 
-    mediaRecorder.start();
+    mediaRecorder.start(10);
+
     document.getElementById("startRecording").disabled = true;
     document.getElementById("stopRecording").disabled = false;
   }
