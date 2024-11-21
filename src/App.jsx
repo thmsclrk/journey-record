@@ -50,12 +50,12 @@ function App() {
     getCameraStream();
 
     // Cleanup: stop the video stream when the component unmounts
-    return () => {
-      if (videoRef.current && videoRef.current.srcObject) {
-        const tracks = videoRef.current.srcObject.getTracks();
-        tracks.forEach((track) => track.stop());
-      }
-    };
+    // return () => {
+    //   if (videoRef.current && videoRef.current.srcObject) {
+    //     const tracks = videoRef.current.srcObject.getTracks();
+    //     tracks.forEach((track) => track.stop());
+    //   }
+    // };
   }, []);
 
   // let mediaRecorder;
