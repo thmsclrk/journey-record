@@ -53,9 +53,10 @@ function App() {
         </button>
         <button id="stopRecording">Stop</button>
       </div>
-      <div>
-        <video ref={videoRef} autoPlay muted></video>
-        {/* <iframe src="https://connect.ap.app.pam.co/?navmapId=9be4fec5-1945-11ee-9083-0a17c8c3f95c" allow="geolocation; accelerometer;  gyroscope; magnetometer"></iframe> */}
+      <div style={{ width: "100%", display: "flex", backgroundColor: "blue", flex: 1 }}>
+        <video ref={videoRef} autoPlay muted />
+
+        <iframe src="https://connect.ap.app.pam.co/?navmapId=9be4fec5-1945-11ee-9083-0a17c8c3f95c" allow="geolocation; accelerometer;  gyroscope; magnetometer"></iframe>
       </div>
     </>
   );
