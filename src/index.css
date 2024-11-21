@@ -27,7 +27,7 @@ iframe {
   position: absolute;
   left: 10px;
   top: 40px;
-  background-color: green;
+  /* background-color: green; */
   width: 40%;
   margin: 0;
   border: none;
@@ -36,7 +36,7 @@ iframe {
 }
 
 video {
-  background-color: green;
+  /* background-color: green; */
   width: 100%;
   /* flex: 1; */
 }
@@ -46,6 +46,6 @@ video {
   flex: 1;
   padding: 0;
   border: none;
-
-  background-color: blue;
+  /* background-color: blue; */
+  display: flex;
 }
