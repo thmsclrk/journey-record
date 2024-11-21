@@ -18,7 +18,9 @@ function App() {
     const getCameraStream = async () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        if (videoRef.current) {
+        if (window.URL && window.URL.createObjectURL) {
+          videoRef.current.src = window.URL.createObjectURL(stream);
+        } else {
           videoRef.current.srcObject = stream;
         }
       } catch (err) {
