@@ -66,7 +66,7 @@ function App() {
       document.getElementById("startRecording").disabled = true;
       document.getElementById("stopRecording").disabled = false;
     } catch (error) {
-      console.error("error when trying to recording screen: ", error);
+      console.error("error when trying to recording screen: ", JSON.stringify(error));
     }
   }
 
