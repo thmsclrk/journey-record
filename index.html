@@ -6,7 +6,18 @@
     <title>PAM Journey Recorder</title>
   </head>
   <body>
-    <div id="root"></div>
+    <!-- <div id="root"></div> -->
+    <video id="video" autoplay muted playsinline></video>
+    <script>
+      navigator.mediaDevices
+        .getUserMedia({ video: true })
+        .then(function (stream) {
+          document.getElementById("video").srcObject = stream;
+        })
+        .catch(function (err) {
+          console.error("Camera access denied:", err);
+        });
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
