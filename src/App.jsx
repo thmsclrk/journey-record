@@ -7,21 +7,6 @@ import { useState, useEffect, useRef } from "react";
 [] take photos
 [] record GPS position
 
-
-navigator.mediaDevices
-        .getUserMedia({
-          video: {
-            facingMode: "environment", // This sets the front-facing camera
-          },
-        })
-        .then(function (stream) {
-          document.getElementById("video").srcObject = stream;
-        })
-        .catch(function (err) {
-          console.error("Camera access denied:", err);
-        });
-
-
 */
 
 function App() {
