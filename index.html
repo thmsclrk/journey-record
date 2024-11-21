@@ -10,7 +10,11 @@
     <video id="video" autoplay muted playsinline></video>
     <script>
       navigator.mediaDevices
-        .getUserMedia({ video: true })
+        .getUserMedia({
+          video: {
+            facingMode: "environment", // This sets the front-facing camera
+          },
+        })
         .then(function (stream) {
           document.getElementById("video").srcObject = stream;
         })
