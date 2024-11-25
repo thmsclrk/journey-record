@@ -6,7 +6,9 @@ import InfoIcon from "@mui/icons-material/Info";
 
 export default function Controls() {
   const [open, setOpen] = useState(false);
-  const [cameraMode, setCameraMode] = useState();
+  // const [cameraMode, setCameraMode] = useState("environment");
+
+  // let cameraMode = "user";  // Set initial camera mode (can be "user" or "environment")
 
   function swapCamera() {
     navigator.mediaDevices
@@ -15,18 +17,23 @@ export default function Controls() {
         const videoTrack = stream.getVideoTracks()[0];
         const settings = videoTrack.getSettings();
 
+        // Swap the camera mode between "user" (front) and "environment" (back)
         const newMode = settings.facingMode === "user" ? "environment" : "user";
-        setCameraMode(newMode);
         alert(newMode);
 
+        // Stop the previous video track to release the camera
+        stream.getTracks().forEach((track) => track.stop());
+
+        // Get the new camera stream based on the new facingMode
         navigator.mediaDevices
           .getUserMedia({
             video: {
-              facingMode: cameraMode, // This sets the front-facing camera
+              facingMode: newMode, // Use the swapped mode
             },
           })
-          .then(function (stream) {
-            document.getElementById("video").srcObject = stream;
+          .then(function (newStream) {
+            // Set the new stream to the video element
+            document.getElementById("video").srcObject = newStream;
           })
           .catch(function (err) {
             console.error("Camera access denied:", err);
