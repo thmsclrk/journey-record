@@ -17,6 +17,7 @@ export default function Controls() {
 
         const newMode = settings.facingMode === "user" ? "environment" : "user";
         setCameraMode(newMode);
+        alert(newMode);
 
         navigator.mediaDevices
           .getUserMedia({
