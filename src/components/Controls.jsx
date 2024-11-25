@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ExpandCircleDownRounded from "@mui/icons-material/ExpandCircleDownRounded";
 import LoopIcon from "@mui/icons-material/Loop";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
 export default function Controls() {
   const [open, setOpen] = useState(false);
@@ -32,8 +33,15 @@ export default function Controls() {
       });
   }
 
+  function uploadRecording() {
+    const isConfirmed = window.confirm("Taking you to the UTS Google Drive folder. Please ensure you have recorded a journey.");
+    if (isConfirmed) {
+      window.location.href = "https://drive.google.com/drive/folders/1eFO4WMIVwiT_yd2AbrEhLbX92kl_iLlh";
+    }
+  }
+
   return (
-    <div className="controls" draggable="true">
+    <div className="controls draggable">
       <div className="control">
         <ExpandCircleDownRounded
           style={{
@@ -49,6 +57,9 @@ export default function Controls() {
         <>
           <div className="control">
             <LoopIcon style={{ color: "#3f6" }} onClick={() => swapCamera()} />
+          </div>
+          <div className="control">
+            <CloudUploadIcon style={{ color: "#3f6" }} onClick={() => uploadRecording()} />
           </div>
         </>
       )}

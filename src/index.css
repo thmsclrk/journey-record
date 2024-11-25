@@ -1,7 +1,8 @@
 :root {
   --pam-border: 3px solid #3f6;
   --pam-green: #3f6;
-  --viewport-size: 30vw;
+  --viewport-size: 40vw;
+  --viewport-size-large: 80vw;
 }
 
 body,
