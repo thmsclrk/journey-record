@@ -17,7 +17,7 @@ export default function Controls() {
         navigator.mediaDevices
           .getUserMedia({
             video: {
-              facingMode: "environment", // This sets the front-facing camera
+              facingMode: cameraMode, // This sets the front-facing camera
             },
           })
           .then(function (stream) {
