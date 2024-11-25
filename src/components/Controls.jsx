@@ -4,7 +4,7 @@ import LoopIcon from "@mui/icons-material/Loop";
 
 export default function Controls() {
   const [open, setOpen] = useState(false);
-  const [cameraMode, setCameraMode] = useState(null);
+  const [cameraMode, setCameraMode] = useState();
 
   function swapCamera() {
     navigator.mediaDevices
@@ -12,6 +12,7 @@ export default function Controls() {
       .then((stream) => {
         const videoTrack = stream.getVideoTracks()[0];
         const settings = videoTrack.getSettings();
+        console.log(settings.facingMode);
         setCameraMode(settings.facingMode === "user" ? "environment" : "user");
       })
       .catch((err) => {
