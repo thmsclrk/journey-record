@@ -29,12 +29,11 @@
 
     <script>
       const draggable = document.getElementById("videoContainer");
-
       let offsetX, offsetY;
-
       function startDrag(e) {
         // Prevent default behavior for touch events (like scrolling)
         e.preventDefault();
+        console.log(e);
 
         // Calculate offset based on mouse/touch position
         if (e.type === "mousedown") {

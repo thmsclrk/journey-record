@@ -1,6 +1,7 @@
 :root {
   --pam-border: 3px solid #3f6;
   --pam-green: #3f6;
+  --viewport-size: 30vw;
 }
 
 body,
@@ -9,7 +10,7 @@ html {
   padding: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden; /* Prevent scrollbars */
+  overflow: hidden;
 }
 
 #root {
@@ -25,22 +26,35 @@ iframe {
   width: 100%;
   flex: 1;
   padding: 0;
-  border: none; /* Optional: Removes the border of the iframe */
+  border: none;
 }
 
 .controls {
   position: absolute;
+  /* background-color: black; */
   left: 10px;
   top: 10px;
-  /* border: var(--pam-border); */
-  /* width: 40px; */
+  /* width: 40px;
+  aspect-ratio: 1;
+  border-radius: 50%; */
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center;
+  align-items: center; */
+}
+
+.control {
+  background-color: black;
+  left: 10px;
+  top: 10px;
+  width: 40px;
   aspect-ratio: 1;
   border-radius: 50%;
-  /* background-color: var(--pam-green); */
-  /* background-color: white; */
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 5px;
 }
 
 #videoContainer {
@@ -48,16 +62,14 @@ iframe {
   left: 10px;
   top: 40px;
   border: var(--pam-border);
-  width: 30%; /* Change this to the desired diameter */
+  width: var(--viewport-size);
+  height: var(--viewport-size);
   aspect-ratio: 1;
   border-radius: 50%;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* resize: both; */
-  /* cursor: grab; */
-  /* position: relative; */
 }
 
 video {
