@@ -14,6 +14,18 @@ export default function Controls() {
         const settings = videoTrack.getSettings();
         console.log(settings.facingMode);
         setCameraMode(settings.facingMode === "user" ? "environment" : "user");
+        navigator.mediaDevices
+          .getUserMedia({
+            video: {
+              facingMode: "environment", // This sets the front-facing camera
+            },
+          })
+          .then(function (stream) {
+            document.getElementById("video").srcObject = stream;
+          })
+          .catch(function (err) {
+            console.error("Camera access denied:", err);
+          });
       })
       .catch((err) => {
         console.error("Error accessing media devices:", err);
@@ -37,12 +49,6 @@ export default function Controls() {
         <>
           <div className="control">
             <LoopIcon style={{ color: "#3f6" }} onClick={() => swapCamera()} />
-          </div>
-          <div className="control">
-            <ExpandCircleDownRounded style={{ color: "#3f6" }} />
-          </div>
-          <div className="control">
-            <ExpandCircleDownRounded style={{ color: "#3f6" }} />
           </div>
         </>
       )}
