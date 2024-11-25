@@ -19,7 +19,7 @@ export default function Controls() {
 
         // Swap the camera mode between "user" (front) and "environment" (back)
         const newMode = settings.facingMode === "user" ? "environment" : "user";
-        alert(newMode);
+        // alert(newMode);
 
         // Stop the previous video track to release the camera
         stream.getTracks().forEach((track) => track.stop());
