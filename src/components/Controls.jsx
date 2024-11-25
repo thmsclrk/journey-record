@@ -14,8 +14,10 @@ export default function Controls() {
       .then((stream) => {
         const videoTrack = stream.getVideoTracks()[0];
         const settings = videoTrack.getSettings();
-        console.log(settings.facingMode);
-        setCameraMode(settings.facingMode === "user" ? "environment" : "user");
+
+        const newMode = settings.facingMode === "user" ? "environment" : "user";
+        setCameraMode(newMode);
+
         navigator.mediaDevices
           .getUserMedia({
             video: {
