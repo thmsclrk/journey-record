@@ -2,6 +2,7 @@ import { useState } from "react";
 import ExpandCircleDownRounded from "@mui/icons-material/ExpandCircleDownRounded";
 import LoopIcon from "@mui/icons-material/Loop";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import InfoIcon from "@mui/icons-material/Info";
 
 export default function Controls() {
   const [open, setOpen] = useState(false);
@@ -40,6 +41,10 @@ export default function Controls() {
     }
   }
 
+  function showInfo() {
+    alert("PAM Journey Recording App v0.1.0");
+  }
+
   return (
     <div className="controls draggable">
       <div className="control">
@@ -60,6 +65,9 @@ export default function Controls() {
           </div>
           <div className="control">
             <CloudUploadIcon style={{ color: "#3f6" }} onClick={() => uploadRecording()} />
+          </div>
+          <div className="control">
+            <InfoIcon style={{ color: "#3f6" }} onClick={() => showInfo()} />
           </div>
         </>
       )}
